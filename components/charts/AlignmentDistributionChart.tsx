@@ -44,19 +44,36 @@ export default function AlignmentDistributionChart({ distribution }: AlignmentDi
   }
 
   return (
-    <ResponsiveContainer width="100%" height={200}>
-      <BarChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-        <XAxis dataKey="label" tick={{ fontSize: 10 }} />
-        <YAxis tick={{ fontSize: 11 }} allowDecimals={false} />
+    <ResponsiveContainer width="100%" height={220}>
+      <BarChart data={data} margin={{ top: 8, right: 8, left: -12, bottom: 4 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+        <XAxis
+          dataKey="label"
+          tick={{ fontSize: 10, fill: '#94a3b8' }}
+          axisLine={{ stroke: '#e2e8f0' }}
+          tickLine={false}
+        />
+        <YAxis
+          tick={{ fontSize: 11, fill: '#94a3b8' }}
+          allowDecimals={false}
+          axisLine={false}
+          tickLine={false}
+        />
         <Tooltip
           formatter={(value, _name, props) => [
             `${value}人`,
             (props as { payload?: { fullLabel?: string } }).payload?.fullLabel || '整合分布',
           ]}
-          contentStyle={{ fontSize: 12 }}
+          contentStyle={{
+            fontSize: 12,
+            borderRadius: 8,
+            border: '1px solid #e2e8f0',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            padding: '8px 12px',
+          }}
+          cursor={{ fill: 'rgba(0,0,0,0.02)' }}
         />
-        <Bar dataKey="count" radius={[4, 4, 0, 0]}>
+        <Bar dataKey="count" radius={[6, 6, 0, 0]} maxBarSize={48}>
           {data.map((entry, index) => (
             <Cell key={index} fill={entry.color} />
           ))}

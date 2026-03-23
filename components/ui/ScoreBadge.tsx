@@ -9,21 +9,21 @@ interface ScoreBadgeProps {
 
 export default function ScoreBadge({ score, label, size = 'md' }: ScoreBadgeProps) {
   const barColor = scoreBarColor(score);
-  const sizeClasses = {
-    sm: 'text-sm',
-    md: 'text-base',
-    lg: 'text-lg',
+  const fontSizes = {
+    sm: 'text-lg',
+    md: 'text-2xl',
+    lg: 'text-3xl',
   };
 
   return (
-    <div className={`inline-flex flex-col gap-1 ${sizeClasses[size]}`}>
-      <div className="flex items-center gap-2">
-        <span className="font-bold text-slate-900">{score}</span>
-        <span className="text-xs text-slate-500">/ 100</span>
+    <div className="inline-flex flex-col gap-1.5">
+      <div className="flex items-baseline gap-1.5">
+        <span className={`font-bold text-slate-900 tracking-tight ${fontSizes[size]}`}>{score}</span>
+        <span className="text-xs text-slate-400 font-medium">/ 100</span>
       </div>
-      <div className="w-24 h-2 bg-slate-100 rounded-full overflow-hidden">
+      <div className="w-28 h-1.5 bg-slate-100 rounded-full overflow-hidden">
         <div
-          className={`h-full rounded-full ${barColor}`}
+          className={`h-full rounded-full transition-all duration-500 ${barColor}`}
           style={{ width: `${score}%` }}
         />
       </div>
@@ -35,7 +35,7 @@ export default function ScoreBadge({ score, label, size = 'md' }: ScoreBadgeProp
 export function AlignmentBadge({ label }: { label: AlignmentLabel }) {
   const colors = alignmentLabelColor(label);
   return (
-    <span className={`inline-block text-xs font-medium px-2 py-0.5 rounded border ${colors.bg} ${colors.text} ${colors.border}`}>
+    <span className={`inline-block text-[11px] font-medium px-2.5 py-1 rounded-md ${colors.bg} ${colors.text}`}>
       {label}
     </span>
   );

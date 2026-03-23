@@ -6,10 +6,10 @@ interface SectionHeadingProps {
 
 export default function SectionHeading({ title, subtitle, centered = false }: SectionHeadingProps) {
   return (
-    <div className={`mb-8 ${centered ? 'text-center' : ''}`}>
-      <h2 className="text-2xl font-bold text-slate-900">{title}</h2>
+    <div className={`mb-10 ${centered ? 'text-center' : ''}`}>
+      <h2 className="text-2xl font-bold text-slate-900 tracking-tight">{title}</h2>
       {subtitle && (
-        <p className="text-slate-600 mt-2 leading-relaxed">{subtitle}</p>
+        <p className="text-slate-500 mt-2 leading-relaxed text-sm max-w-2xl">{subtitle}</p>
       )}
     </div>
   );

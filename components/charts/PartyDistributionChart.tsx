@@ -40,16 +40,33 @@ export default function PartyDistributionChart({
   }
 
   return (
-    <ResponsiveContainer width="100%" height={200}>
-      <BarChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-        <XAxis dataKey="name" tick={{ fontSize: 12 }} />
-        <YAxis domain={[0, 100]} tick={{ fontSize: 11 }} />
+    <ResponsiveContainer width="100%" height={220}>
+      <BarChart data={data} margin={{ top: 8, right: 8, left: -12, bottom: 4 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+        <XAxis
+          dataKey="name"
+          tick={{ fontSize: 11, fill: '#94a3b8' }}
+          axisLine={{ stroke: '#e2e8f0' }}
+          tickLine={false}
+        />
+        <YAxis
+          domain={[0, 100]}
+          tick={{ fontSize: 11, fill: '#94a3b8' }}
+          axisLine={false}
+          tickLine={false}
+        />
         <Tooltip
           formatter={(value) => [`${value}点`, '平均整合スコア']}
-          contentStyle={{ fontSize: 12 }}
+          contentStyle={{
+            fontSize: 12,
+            borderRadius: 8,
+            border: '1px solid #e2e8f0',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+            padding: '8px 12px',
+          }}
+          cursor={{ fill: 'rgba(0,0,0,0.02)' }}
         />
-        <Bar dataKey="score" radius={[4, 4, 0, 0]}>
+        <Bar dataKey="score" radius={[6, 6, 0, 0]} maxBarSize={48}>
           {data.map((entry, index) => (
             <Cell key={index} fill={entry.color} />
           ))}

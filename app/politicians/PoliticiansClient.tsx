@@ -10,6 +10,7 @@ import PoliticianCard from '@/components/politicians/PoliticianCard';
 import PoliticianTable from '@/components/politicians/PoliticianTable';
 import FilterBar from '@/components/politicians/FilterBar';
 import SearchBox from '@/components/politicians/SearchBox';
+import { LayoutGrid, List } from 'lucide-react';
 
 interface PoliticiansClientProps {
   politicians: Politician[];
@@ -38,31 +39,34 @@ export default function PoliticiansClient({ politicians, parties, scores }: Poli
             onChange={(q) => setFilters((f) => ({ ...f, query: q }))}
           />
         </div>
-        <div className="flex gap-2">
+        {/* Segmented toggle */}
+        <div className="flex bg-slate-100 rounded-xl p-1 gap-0.5">
           <button
             onClick={() => setViewMode('grid')}
-            className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-colors border ${
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
               viewMode === 'grid'
-                ? 'bg-blue-900 text-white border-blue-900'
-                : 'bg-white text-slate-600 border-slate-300 hover:border-blue-400'
+                ? 'bg-white text-slate-900 shadow-sm'
+                : 'text-slate-500 hover:text-slate-700'
             }`}
           >
+            <LayoutGrid className="w-3.5 h-3.5" />
             カード
           </button>
           <button
             onClick={() => setViewMode('table')}
-            className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-colors border ${
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-medium transition-all ${
               viewMode === 'table'
-                ? 'bg-blue-900 text-white border-blue-900'
-                : 'bg-white text-slate-600 border-slate-300 hover:border-blue-400'
+                ? 'bg-white text-slate-900 shadow-sm'
+                : 'text-slate-500 hover:text-slate-700'
             }`}
           >
+            <List className="w-3.5 h-3.5" />
             テーブル
           </button>
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-6">
+      <div className="flex flex-col lg:flex-row gap-8">
         {/* Sidebar filters */}
         <aside className="lg:w-64 flex-shrink-0">
           <FilterBar
@@ -74,11 +78,12 @@ export default function PoliticiansClient({ politicians, parties, scores }: Poli
 
         {/* Main content */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-sm text-slate-600">
-              {filtered.length}件 / {politicians.length}件中
+          <div className="flex items-center justify-between mb-5">
+            <p className="text-sm text-slate-400">
+              <span className="font-semibold text-slate-900">{filtered.length}</span>
+              <span className="mx-1">/ {politicians.length}件</span>
               {filters.minTermsServed >= 2 && (
-                <span className="ml-2 text-xs text-blue-700 bg-blue-50 rounded px-2 py-0.5">
+                <span className="ml-1.5 text-[10px] font-medium text-slate-500 bg-slate-100 rounded-md px-2 py-0.5">
                   2期以上
                 </span>
               )}
@@ -96,8 +101,8 @@ export default function PoliticiansClient({ politicians, parties, scores }: Poli
                 />
               ))}
               {filtered.length === 0 && (
-                <div className="col-span-full text-center py-16 text-slate-500">
-                  <p className="text-lg">該当する議員が見つかりませんでした</p>
+                <div className="col-span-full text-center py-20 text-slate-400">
+                  <p className="text-base">該当する議員が見つかりませんでした</p>
                   <p className="text-sm mt-2">フィルタ条件を変えてお試しください</p>
                 </div>
               )}

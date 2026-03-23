@@ -1,3 +1,4 @@
+import { ExternalLink } from 'lucide-react';
 import { shortenUrl } from '@/lib/normalize';
 
 interface SourceLinkCardProps {
@@ -9,8 +10,8 @@ interface SourceLinkCardProps {
 
 export default function SourceLinkCard({ label, url, isCurated, curatedNote }: SourceLinkCardProps) {
   return (
-    <div className="border border-slate-200 rounded-md p-3 bg-slate-50">
-      <div className="flex items-start justify-between gap-2">
+    <div className="bg-white border border-slate-200/80 rounded-xl p-4 hover:shadow-md transition-shadow duration-200">
+      <div className="flex items-start justify-between gap-3">
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-slate-800 truncate">{label}</p>
           {url && (
@@ -18,7 +19,7 @@ export default function SourceLinkCard({ label, url, isCurated, curatedNote }: S
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-blue-600 hover:underline truncate block"
+              className="text-xs text-slate-400 hover:text-slate-600 truncate block mt-1 transition-colors"
             >
               {shortenUrl(url)}
             </a>
@@ -29,17 +30,15 @@ export default function SourceLinkCard({ label, url, isCurated, curatedNote }: S
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs text-slate-500 hover:text-blue-600 flex-shrink-0"
+            className="text-slate-300 hover:text-slate-500 flex-shrink-0 transition-colors"
             aria-label="外部サイトへ"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
+            <ExternalLink className="w-4 h-4" />
           </a>
         )}
       </div>
       {isCurated && (
-        <p className="text-xs text-amber-700 mt-1 bg-amber-50 rounded px-2 py-0.5">
+        <p className="text-[11px] text-slate-400 mt-2 bg-slate-50 rounded-md px-2.5 py-1">
           {curatedNote || '整理要約・デモ参照'}
         </p>
       )}
