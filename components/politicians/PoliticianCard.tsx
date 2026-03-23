@@ -5,6 +5,7 @@ import type { ScoreResult } from '@/types/scoring';
 import { AlignmentBadge } from '@/components/ui/ScoreBadge';
 import { scoreBarColor } from '@/lib/labels';
 import { chamberShort } from '@/lib/normalize';
+import { ArrowUpRight } from 'lucide-react';
 
 interface PoliticianCardProps {
   politician: Politician;
@@ -18,12 +19,12 @@ export default function PoliticianCard({ politician, party, score }: PoliticianC
   return (
     <Link
       href={`/politicians/${politician.id}`}
-      className="block bg-white rounded-lg border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all"
+      className="group block bg-white rounded-xl border border-slate-200/80 hover:shadow-md hover:border-slate-300 transition-all duration-200"
     >
       <div className="p-5">
         {/* Header */}
-        <div className="flex items-start gap-3 mb-4">
-          <div className="relative w-12 h-12 rounded-full overflow-hidden bg-slate-200 flex-shrink-0">
+        <div className="flex items-start gap-3.5 mb-4">
+          <div className="relative w-11 h-11 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0">
             <Image
               src={politician.profileImage || '/placeholder-profile.png'}
               alt={politician.nameJa}
@@ -32,32 +33,35 @@ export default function PoliticianCard({ politician, party, score }: PoliticianC
             />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="text-base font-bold text-slate-900 truncate">{politician.nameJa}</h3>
-            <p className="text-xs text-slate-500">{politician.nameKana}</p>
-            <div className="flex items-center gap-2 mt-1 flex-wrap">
-              {party && (
-                <span
-                  className="text-xs font-medium px-2 py-0.5 rounded text-white"
-                  style={{ backgroundColor: party.colorToken }}
-                >
-                  {party.abbreviation}
-                </span>
-              )}
-              <span className="text-xs text-slate-600 bg-slate-100 rounded px-1.5 py-0.5">
-                {chamberShort(politician.chamber)}
-              </span>
-              <span className="text-xs text-slate-500">{politician.termsServed}期</span>
+            <div className="flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-slate-900 truncate">{politician.nameJa}</h3>
+              <ArrowUpRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-slate-500 transition-colors flex-shrink-0" />
             </div>
+            <p className="text-[11px] text-slate-400 mt-0.5">{politician.nameKana}</p>
           </div>
         </div>
 
-        {/* District */}
-        <p className="text-xs text-slate-500 mb-3">{politician.district}</p>
+        {/* Metadata row */}
+        <div className="flex items-center gap-1.5 mb-3">
+          {party && (
+            <span
+              className="text-[10px] font-semibold px-2 py-0.5 rounded-md text-white"
+              style={{ backgroundColor: party.colorToken }}
+            >
+              {party.abbreviation}
+            </span>
+          )}
+          <span className="text-[10px] text-slate-500 bg-slate-100 rounded-md px-1.5 py-0.5 font-medium">
+            {chamberShort(politician.chamber)}
+          </span>
+          <span className="text-[10px] text-slate-400">{politician.termsServed}期</span>
+          <span className="text-[10px] text-slate-400 truncate">{politician.district}</span>
+        </div>
 
         {/* Issue tags */}
         <div className="flex flex-wrap gap-1 mb-4">
           {politician.issueTags.slice(0, 3).map((tag) => (
-            <span key={tag} className="text-xs bg-blue-50 text-blue-700 rounded px-2 py-0.5 border border-blue-100">
+            <span key={tag} className="text-[10px] bg-slate-50 text-slate-500 border border-slate-200 rounded-md px-2 py-0.5">
               {tag}
             </span>
           ))}
@@ -66,12 +70,18 @@ export default function PoliticianCard({ politician, party, score }: PoliticianC
         {/* Score */}
         {score && (
           <div className="border-t border-slate-100 pt-3">
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-xs text-slate-500">総合整合スコア</span>
-              <span className="text-sm font-bold text-slate-900">{score.overallScore}<span className="text-xs font-normal text-slate-400">/100</span></span>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[11px] text-slate-400 font-medium">総合整合スコア</span>
+              <span className="text-sm font-bold text-slate-900 tracking-tight">
+                {score.overallScore}
+                <span className="text-[10px] font-normal text-slate-400 ml-0.5">/100</span>
+              </span>
             </div>
-            <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mb-2">
-              <div className={`h-full rounded-full ${barColor}`} style={{ width: `${score.overallScore}%` }} />
+            <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mb-2.5">
+              <div
+                className={`h-full rounded-full transition-all duration-500 ${barColor}`}
+                style={{ width: `${score.overallScore}%` }}
+              />
             </div>
             <AlignmentBadge label={score.alignmentLabel} />
           </div>

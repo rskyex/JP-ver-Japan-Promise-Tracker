@@ -17,11 +17,11 @@ export default async function PoliticiansPage() {
   const scoresMap = Object.fromEntries(scores.map((s) => [s.politicianId, s]));
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="max-w-6xl mx-auto px-5 sm:px-8 py-12">
       {/* Page header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900">議員一覧</h1>
-        <p className="text-slate-600 mt-2">
+        <h1 className="text-3xl font-bold text-slate-900 tracking-tight">議員一覧</h1>
+        <p className="text-sm text-slate-500 mt-2">
           国会議員の公約整合スコアを一覧できます。初期設定では2期以上の議員が表示されています。
         </p>
       </div>
