@@ -34,9 +34,11 @@
 | 技術 | 用途 |
 |------|------|
 | **Next.js 16** (App Router) | フルスタックフレームワーク |
+| **React 19** | UIライブラリ |
 | **TypeScript** | 型安全なコード |
-| **Tailwind CSS** | スタイリング |
+| **Tailwind CSS v4** | スタイリング |
 | **Recharts** | グラフ・チャート |
+| **lucide-react** | アイコン |
 | **ローカル TS ファイル** | シードデータ (デモ) |
 
 ---
@@ -63,19 +65,21 @@ npm run start
 
 ```
 ├── app/
-│   ├── page.tsx                    # ホームページ
-│   ├── politicians/page.tsx         # 議員一覧
-│   ├── politicians/[id]/page.tsx    # 議員詳細
-│   ├── promises/[id]/page.tsx       # 公約詳細
-│   ├── methodology/page.tsx         # 方法論
-│   ├── sources/page.tsx             # 出典
+│   ├── page.tsx                       # ホームページ
+│   ├── politicians/page.tsx            # 議員一覧（サーバー）
+│   ├── politicians/PoliticiansClient.tsx # 議員一覧（クライアント: 検索・フィルタ）
+│   ├── politicians/[id]/page.tsx       # 議員詳細
+│   ├── promises/[id]/page.tsx          # 公約詳細
+│   ├── methodology/page.tsx            # 方法論
+│   ├── sources/page.tsx                # 出典
+│   ├── globals.css                     # グローバルスタイル
 │   └── layout.tsx
 ├── components/
-│   ├── ui/          # 汎用UIコンポーネント
-│   ├── charts/      # Rechartsグラフ
+│   ├── ui/          # 汎用UIコンポーネント（バッジ・カード・タイムライン等）
+│   ├── charts/      # Rechartsグラフ（レーダー・分布・内訳）
 │   ├── layout/      # Navbar, Footer
-│   ├── politicians/ # 議員一覧・詳細コンポーネント
-│   └── promises/    # 公約コンポーネント
+│   ├── politicians/ # 議員カード・テーブル・検索・フィルタ
+│   └── promises/    # 公約カード
 ├── data/
 │   ├── politicians.ts   ← デモシードデータ（実データに置換予定）
 │   ├── promises.ts      ← デモシードデータ
@@ -187,7 +191,7 @@ All rights reserved unless otherwise specified.
 ```
 
 Japan Promise Tracker — シビックテック・政策研究プロトタイプ
-© 2024 Risa Koyanagi
+© 2024–2026 Risa Koyanagi
 
 ---
 
